@@ -1,63 +1,92 @@
 #include <stdio.h>
 
-void casasTabuleiro(char matrizCasas[3][3]) {
+#define LINHAS 3
+#define COLUNAS 3
 
-    printf("\t %c | %c | %c | \n", matrizCasas[0][0], matrizCasas[0][1], matrizCasas[0][2]);
-    printf("\t------------\n");
-    printf("\t %c | %c | %c | \n", matrizCasas[1][0], matrizCasas[1][1], matrizCasas[1][2]);
-    printf("\t------------\n");
-    printf("\t %c | %c | %c | \n", matrizCasas[2][0], matrizCasas[2][1], matrizCasas[2][2]);
+int jogadaTabuleiro(char jogador, int matrizcasas[3][3], int jogadaescolha) {
 
+    for (int i = 0; i < 3; i++) {
+
+        for (int j = 0; j < 3; j++) {
+    
+            if (jogadaescolha == matrizcasas[i][j]) {
+                
+                matrizcasas[i][j] = jogador;
+                printf("| %c |", jogador);
+    
+            } else {
+                    
+                printf("| %d |", matrizcasas[i][j]);
+    
+            }
+    
+        } printf("\n");
+    
+    }
+
+    return 0;
 
 }
+
+
+union EscolhaJogador {
+
+    int escolhaCasa;
+
+} typedef EscolhaJogador;
+
+
 int main() {
 
-    int linha = 0, coluna = 0, vez = 0;
-    char matrizCasas[3][3];
+    int vez = 0;
+    char jogador1 = 'X', jogador2 = 'O';
+    int matrizCasas[LINHAS][COLUNAS];
+
     for (int i = 0; i < 3; i++) {
 
         for (int j = 0; j < 3; j++) {
 
-            printf("|__|");
+            printf("| %d |", matrizCasas[i][j]);
 
         } printf("\n");
 
     }
+
+    EscolhaJogador jogada;
+
     printf("Jogador 1\n");
-    printf("Digite a linha: ");
-    scanf("%d", &linha);
-    printf("Digite a coluna: ");
-    scanf("%d", &coluna);
+
+    printf("Digite a escolha: ");
+    scanf("%d", &jogada.escolhaCasa);
     vez++;
 
-    if (linha < 1 || coluna < 1 || linha > 3 || coluna > 3) {
+    jogadaTabuleiro(jogador1, matrizCasas, jogada.escolhaCasa);
 
-        linha  = 0;
-        coluna = 0;
-        printf("Jogada errada.\n");
+    /*for (int i = 0; i < 3; i++) {
 
-    } else if (matrizCasas[linha - 1][coluna - 1] == ' ') {
+        for (int j = 0; j < 3; j++) {
 
-        linha  = 0;
-        coluna = 0;
-        printf("Jogada errada.\n");
+            if (jogada1.escolha == matrizCasas[i][j]) {
 
-    } else {
+                printf("| %c |", jogador1);
 
-        if (vez % 2 == 0) {
+            } else {
+                
+                printf("| %d |", matrizCasas[i][j]);
 
-            matrizCasas[linha - 1][coluna - 1] == "X";
-            casasTabuleiro(matrizCasas[linha - 1][coluna - 1] == "X");
+            }
 
-        } else {
+        } printf("\n");
 
-            matrizCasas[linha - 1][coluna - 1] == "O";
-            casasTabuleiro(matrizCasas[linha - 1][coluna - 1] == "O");
+    }*/
 
-        }
+    printf("Jogador 2\n");
 
-    }
+    printf("Digite a escolha: ");
+    scanf("%d", &jogada.escolhaCasa);
+    vez++;
 
+    jogadaTabuleiro(jogador2, matrizCasas, jogada.escolhaCasa);
 
     return 0;
 
